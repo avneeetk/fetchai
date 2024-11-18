@@ -1,11 +1,24 @@
+"""
+Google Sheets Interaction Utility
+
+Provides a robust interface for interacting with Google Sheets:
+- Handles OAuth2 authentication
+- Reads sheet data into pandas DataFrames
+- Extracts sheet IDs from URLs
+- Provides error handling for sheet operations
+
+Security and Error Handling Considerations:
+- Uses service account credentials
+- Validates sheet URLs and data ranges
+- Implements comprehensive error logging
+"""
+
 import pandas as pd
 import re
-import logging
 import streamlit as st
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
-from typing import Optional, Dict, Any
-import json
+
 
 class SheetsUtils:
     def __init__(self, credentials_path: str = "client_secret_473251366195-0qitms65hsnb3uomijh7kke37m6q1oft.apps.googleusercontent.com.json"):
@@ -49,18 +62,19 @@ class SheetsUtils:
 
     def read_sheet(self, sheet_id: str, range_name: str) -> pd.DataFrame:
         """
-        Read data from a Google Sheet and return it as a pandas DataFrame.
+    Retrieve and parse data from a specified Google Sheet.
+
+    Args:
+        sheet_id (str): Unique identifier for the Google Sheet
+        range_name (str): Specific cell range to extract (e.g., "Sheet1!A1:D10")
+
+    Returns:
+        pd.DataFrame: Parsed sheet data with first row as headers
+
+    Raises:
+        RuntimeError: If sheet cannot be accessed or parsed
+    """
         
-        Args:
-            sheet_id (str): The ID of the Google Sheet
-            range_name (str): The range of cells to read (e.g., "Sheet1!A1:D10")
-            
-        Returns:
-            pd.DataFrame: DataFrame containing the sheet data
-            
-        Raises:
-            RuntimeError: If there's an error reading the sheet
-        """
         if not self.service:
             raise RuntimeError("Google Sheets API service is not initialized.")
 

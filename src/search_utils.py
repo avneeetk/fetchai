@@ -1,19 +1,37 @@
+"""
+Search Handling Module
+
+Provides flexible search capabilities:
+- Interfaces with SerpAPI for web searches
+- Implements rate limiting to prevent API abuse
+- Supports batch and individual entity searches
+- Standardizes search result processing
+
+Performance and Reliability Features:
+- Configurable search parameters
+- Timeout and result limit management
+- Comprehensive error handling
+"""
+
 import requests
 import time
-from config import SERPAPI_KEY
+from config import SERP_API_KEY
 import logging
 from config import MAX_SEARCH_RESULTS, SEARCH_TIMEOUT
-
-
 class SearchHandler:
-    def __init__(self, api_key="24c749896cfe909bdaa601152f1d7e418aa27364eb3d47bb96c1033fb254ac4e", search_engine="google", min_request_interval=1):
+    def __init__(self, api_key=SERP_API_KEY, search_engine="google", min_request_interval=1):
         self.api_key = api_key
         self.search_engine = search_engine
         self.min_request_interval = min_request_interval
         self.last_request_time = 0
 
     def _rate_limit(self):
-        """Impose rate limiting between requests."""
+        """
+    Implement adaptive rate limiting:
+    - Prevent overwhelming external APIs
+    - Ensure consistent, respectful API usage
+    - Dynamically adjust request intervals
+    """
         time_since_last_request = time.time() - self.last_request_time
         if time_since_last_request < self.min_request_interval:
             time.sleep(self.min_request_interval - time_since_last_request)

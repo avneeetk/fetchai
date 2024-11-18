@@ -1,3 +1,13 @@
+"""
+Configuration Management Module
+
+This module handles environment variable loading and centralized configuration settings.
+Key functionalities:
+- Load API keys securely from .env file
+- Define application-wide constants
+- Centralize error message definitions
+"""
+
 from dotenv import load_dotenv
 import os
 
@@ -5,7 +15,7 @@ import os
 load_dotenv()
 
 # API Keys
-SERPAPI_KEY = os.getenv("SERPAPI_KEY")
+SERP_API_KEY = os.getenv("SERP_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # Search Settings

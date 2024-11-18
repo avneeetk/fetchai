@@ -1,10 +1,26 @@
+"""
+Language Model (LLM) Processing Utility
+
+Manages interactions with Groq's LLM:
+- Handles information extraction from search results
+- Provides batch processing capabilities
+- Implements consistent prompt engineering
+- Manages LLM response validation
+
+AI Processing Considerations:
+- Uses controlled temperature for consistent outputs
+- Implements fallback and error handling
+- Supports flexible extraction prompts
+"""
+
+
 from groq import Groq
 from config import GROQ_API_KEY, ERROR_MESSAGES
 import logging
 
 class LLMHandler:
     def __init__(self):
-        self.client = Groq(api_key="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")
+        self.client = Groq(api_key = GROQ_API_KEY)
         self.model = "llama3-8b-8192"
 
     def extract_information(self, search_results: dict, extraction_prompt: str) -> dict:

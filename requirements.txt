@@ -1,0 +1,10 @@
+streamlit
+pandas
+google-auth
+google-auth-oauthlib
+google-api-python-client
+requests
+python-dotenv
+groq
+serpapi
+logging

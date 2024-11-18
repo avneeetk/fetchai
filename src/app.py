@@ -1,3 +1,20 @@
+"""
+Main Streamlit Application Entry Point
+
+Core Application Workflow:
+1. Data Source Selection (CSV/Google Sheets)
+2. Entity Column Selection
+3. Search Prompt Configuration
+4. Batch Information Extraction
+5. Results Visualization and Export
+
+User Experience Features:
+- Interactive data loading
+- Real-time processing status
+- Comprehensive error handling
+- Downloadable results
+"""
+
 import streamlit as st
 import pandas as pd
 from search_utils import SearchHandler
