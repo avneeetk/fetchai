@@ -18,10 +18,11 @@ import re
 import streamlit as st
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
+import os
 
 
 class SheetsUtils:
-    def __init__(self, credentials_path: str = "client_secret_473251366195-0qitms65hsnb3uomijh7kke37m6q1oft.apps.googleusercontent.com.json"):
+    def __init__(self, credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")):
         """
         Initialize the SheetsUtils class with credentials from a JSON file.
         
